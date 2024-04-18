@@ -1,0 +1,42 @@
+import java.util.*;
+import java.util.stream.Stream;
+import java.io.*;
+public class yandexB17 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		Queue<Integer> q1 = new LinkedList<Integer>();
+		Queue<Integer> q2 = new LinkedList<Integer>();
+		String str1 = inFile.nextLine();
+		String str2 = inFile.nextLine();
+		Stream.of(str1.substring(0,str1.length()).split(" ")).forEach(x ->{
+			q1.add(Integer.parseInt(x));
+		});
+		Stream.of(str2.substring(0,str2.length()).split(" ")).forEach(x ->{
+			q2.add(Integer.parseInt(x));
+		});
+		int i = 0;
+		while(i<1000000) {
+			int a = q1.poll(), b = q2.poll();
+			if(a == 9 && b == 0) {
+				q2.add(a);
+				q2.add(b);
+			}
+			else if(a>b || (a==0 && b ==9)){
+				q1.add(a);
+				q1.add(b);
+			}
+			else { 
+				q2.add(a);
+				q2.add(b);
+			}
+			++i;
+			if (q1.size() == 0 || q2.size()==0) break;
+		}
+		if (i == 1000000) out.write("botva");
+		else if(q1.size()==0) out.write("second "+i);
+		else out.write("first "+i);
+		out.close();
+	}
+
+}
