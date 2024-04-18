@@ -1,0 +1,17 @@
+import java.util.*;
+import java.io.*;
+public class yandexB21 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		int N = inFile.nextInt();
+		int[] ans = new int[35];
+		ans[0] = 2;
+		ans[1] = 4;
+		ans[2] = 7;
+		for(int i=3; i<N;++i)
+			ans[i] = ans[i-1]+ans[i-2]+ans[i-3];
+		out.write(ans[N-1]+"");
+		out.close();
+	}
+}
