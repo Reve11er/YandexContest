@@ -1,0 +1,30 @@
+import java.util.*;
+import java.io.*;
+public class yandexB12 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		String[] s = inFile.nextLine().split("");
+		Stack<String> stack = new Stack<String>();
+		for(int i=0; i<s.length;++i) {
+			if(s[i].equals("(")) stack.push(")");
+			else if (s[i].equals("{")) stack.push("}");
+			else if (s[i].equals("[")) stack.push("]");
+			else if(stack.size()== 0){
+				stack.push("a");
+				break;
+			}
+			else {
+			String s1 = stack.pop();
+			if(!s1.equals(s[i])) {
+				stack.push("a");
+				break;
+			};
+			}
+		}
+		if (stack.size() == 0) out.write("yes");
+		else out.write("no");
+		out.close();
+	}
+
+}
