@@ -1,0 +1,32 @@
+import java.util.*;
+import java.io.*;
+public class yandexB14 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		try (FileWriter out = new FileWriter("output.txt")) {
+			Stack<Integer> stack = new Stack<Integer>();
+			int N = inFile.nextInt(), b=1, i=0;
+			inFile.nextLine();
+			String[] s = inFile.nextLine().split(" ");
+			while(i<N) {
+				if (stack.size() !=0 && stack.lastElement() == b) {
+					stack.pop();
+					++b;
+					--i;
+				}
+				else if (Integer.parseInt(s[i]) == b) {
+					++b;
+				}
+				else stack.push(Integer.parseInt(s[i]));
+				++i;
+			}
+			int c = stack.size();
+			for (i=0; i<=c;++i) {
+				if (stack.size()==0 || stack.pop() != b) break;
+				else ++b;
+			}
+			if (stack.size()!=0) out.write("NO");
+			else out.write("YES");
+		} catch (NumberFormatException e) {}
+	}
+}
