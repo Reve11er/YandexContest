@@ -1,0 +1,31 @@
+import java.util.*;
+import java.io.*;
+public class yandexB16 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		Queue<String> queue = new LinkedList<String>();
+		String s;
+		while(inFile.hasNext()) {
+			s = inFile.next();
+			if(s.equals("push")) {
+				queue.add(inFile.next());
+				out.write("ok\n");
+			}
+			else if(s.equals("pop") && queue.size()!=0) out.write(queue.poll()+"\n");
+			else if(s.equals("front") && queue.size()!=0) out.write(queue.peek()+"\n");
+			else if(s.equals("size")) out.write(queue.size()+"\n");
+			else if(s.equals("clear")) {
+				queue.clear();
+				out.write("ok\n");
+			}
+			else if(s.equals("exit")) {
+				out.write("bye");
+				break;
+			}
+			else out.write("error\n");
+		}
+		out.close();
+	}
+
+}
