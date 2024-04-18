@@ -1,0 +1,19 @@
+import java.util.*;
+import java.io.*;
+public class yandexB13 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		Stack<Integer> stack = new Stack<Integer>();
+		String[] s = inFile.nextLine().split(" ");
+		for(int i=0; i<s.length;++i) {
+			if (!s[i].matches("\\D")) stack.push(Integer.parseInt(s[i]));
+			else if(s[i].equals("+")) stack.push(stack.pop()+stack.pop());
+			else if(s[i].equals("-")) stack.push(-stack.pop()+stack.pop());
+			else if(s[i].equals("*")) stack.push(stack.pop()*stack.pop());
+		}
+		out.write(stack.pop()+"\n");
+		out.close();
+	}
+
+}
