@@ -1,0 +1,20 @@
+import java.util.*;
+import java.io.*;
+public class yandexB22 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		int N = inFile.nextInt();
+		int k = inFile.nextInt();
+		int[] m = new int[N+1];
+		m[0] = m[1] = 1;
+		for(int i=2;i<N;++i)
+			for(int j=1; j<=k;++j) {
+				if(i-j<0) break;
+				m[i] +=m[i-j];
+			}
+		out.write(m[N-1]+"");
+		out.close();
+	}
+
+}
