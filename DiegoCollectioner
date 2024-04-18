@@ -1,0 +1,37 @@
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.io.*;
+public class yandexA3 {
+	public static void main(String[] args) throws IOException {
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		try (FileWriter out = new FileWriter("output.txt")) {
+			inFile.nextLine();
+			String str = inFile.nextLine();
+			inFile.nextLine();
+			String str2 = inFile.nextLine();
+			List<Integer> list = new ArrayList<Integer>();
+			Stream.of(str.substring(0,str.length()).split(" ")).collect(Collectors.toSet()).stream().forEach(x -> {
+				list.add(Integer.parseInt(x));
+			});
+			Collections.sort(list);
+			int a = list.get(0), b = list.get(list.size()-1);
+			Stream.of(str2.substring(0,str2.length()).split(" ")).forEach(x -> {
+				if(Integer.parseInt(x)<a)
+					try {
+						out.write("0\n");
+					} catch (IOException e1) {}
+				else if(Integer.parseInt(x)>b)
+					try {
+						out.write(list.size()+"\n");
+					} catch (IOException e1) {}
+				else {
+				int c = Collections.binarySearch(list, Integer.parseInt(x));
+				if (c<0) c = -c-1;
+				try {
+					out.write(c+"\n");
+				} catch (IOException e) {}
+			}});
+		}
+	}
+}
