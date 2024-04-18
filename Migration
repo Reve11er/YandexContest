@@ -1,0 +1,25 @@
+import java.util.*;
+import java.io.*;
+public class yandexB15 {
+	public static void main(String[] args) throws IOException{
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		int N = inFile.nextInt();
+		inFile.nextLine();
+		int[] arr = new int[N], res = new int [N];
+		for(int i=0;i<N;++i)
+			arr[i] = inFile.nextInt();
+		Stack<Integer> stk = new Stack<Integer>();
+		for (int i=0; i<N;++i) {
+			while(!stk.empty() && arr[stk.lastElement()] > arr[i]) {
+				res[stk.lastElement()] = i;
+				stk.pop();
+			}
+			stk.push(i);
+		}
+		for(int i=0;i<N;++i)
+			if(res[i]==0) out.write("-1 ");
+			else out.write(res[i]+" ");
+		out.close();
+	}
+}
