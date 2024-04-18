@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+public class yandexB11 {
+	public static void main(String[] args) throws IOException {
+		Stack<String> stack= new Stack<String>();
+		Scanner inFile = new Scanner(new FileReader("input.txt"));
+		FileWriter out = new FileWriter("output.txt");
+		String s;
+		while (inFile.hasNext()) {
+			s = inFile.next();
+			if(s.equals("push")) {
+				stack.push(inFile.next());
+				out.write("ok\n");
+			}
+			else if (s.equals("pop") && stack.size()!=0) out.write(stack.pop()+"\n");
+			else if (s.equals("size")) out.write(stack.size()+"\n");
+			else if (s.equals("back") && stack.size() != 0) out.write(stack.lastElement()+"\n");
+			else if (s.equals("clear")) {
+				out.write("ok\n");
+				stack.clear();
+			}
+			else if(s.equals("exit")) {
+				out.write("bye");
+				break;
+			}
+			else out.write("error\n");
+		}
+		out.close();
+	}
+
+}
